@@ -1,0 +1,77 @@
+* tictactoe game model
+- tictactoe game hota hai jisme 3x3 grid hoti hai.
+- each grid address pe either O or X store hota hai
+- if three consecutive or adjacent elements are the same (could be a column(j), row(i) or diagonal (i == j)) 
+- then the player who played the last move wins
+
+* how we can implement it
+- ek 3x3 ki matrix banate hai
+- usee 1-9 se initialise kardo
+- player move function define kardo -> agar player O hai to, the index the person chooses will be changed with O
+- winning condition : in the second level heading below
+- if all index are filled without triggering the winning condition, then it will be a draw
+
+** winning condition
+*** brute force approach
+- manually insert all the 8 conditions (3 rows, 3 columns, 2 diagonals)
+
+*** general condition
+- i1 rows loops chalao and usme sare j equal hai to game won
+- ek column ke liye loop lagao jisme maanlo j1 me sare i equal ho
+- ek teesri loop diagonals ke liye
+- yar isse badhiya to manual conditions hi hai, it will just be one operation while these loops seems to be very inefficient
+
+* now orchestrate kese karenge
+- prepare the matrix
+
+- even iterations for player 1 and odd iterations for the player 2
+
+- before the loop starts, we will ask the player 1 (odd) & 2 (even) for their names and store it inside variable player1 and player2
+- we will also ask them for choice of their characters (O, X or else) and store them in char1 and char2
+
+- ek while loop chalayenge jo ki matrix ke present state ko print karti rahegi
+- ye loop finish hogi after 9+1 (original matrix + 9 moves) iterations and result at the end would be a draw
+
+- har ek iteration me alternate player will be asked to choose their index
+- player 1 will be odd and if i is odd then char1 gets filled and vice versa
+
+- there will be a if statement for the winning condition which will end the loop early 
+- winning condition will set flag to 1 and break the loop
+- in the winning condition statement we will store even or odd which will determine which player won
+
+- after loop ends, there will be a if which will print draw if fl -> 0 and last player won if fl -> 1
+
+
+* playthrough
+** it1
+matrix prints
+player1 chooses the slot
+char1 filled on that slot
+winning condition is checked, if true then playerState = 1 (odd)
+** it2
+matrix prints
+player2 chooses the slot
+char2 filled on that slot
+winning condition is checked, if true then playerState = 0 (even)
+** basically
+3 -> odd
+4 -> even
+5 -> odd
+6 -> even
+7 -> odd
+8 -> even
+9 -> odd
+
+* matrix slots
+00 -> 1
+01 -> 2
+02 -> 3
+10 -> 4
+11 -> 5
+12 -> 6
+20 -> 7
+21 -> 8
+22 -> 9
+
+** if we take slot input, how do we relate it with matrix indices
+We create two separate functions which return i and j value separately, based on slot input.
